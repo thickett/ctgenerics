@@ -1,8 +1,6 @@
 from unittest import TestCase,main
 from unittest.mock import patch, MagicMock
 from ctgenerics import connect
-from ctgenerics.connect import MissingConfigError
-import os
 class TestConnection(TestCase):
     
     def test_init_with_explicit_config_path(self):
@@ -10,7 +8,7 @@ class TestConnection(TestCase):
         with patch('os.path.exists', return_value=True), \
              patch('ctgenerics.connect.load_dbconfig', return_value=MagicMock(user='user', password='pass', host='host', port=5439, dbname='dbname')), \
              patch('ctgenerics.connect.create_engine') as mock_create_engine:
-            rs = connect.Redshift('source', config_path='/explicit/path/to/config.yaml')
+            connect.Redshift('source', config_path='/explicit/path/to/config.yaml')
             mock_create_engine.assert_called_once()
 
     def test_init_with_env_variable(self):
@@ -19,7 +17,7 @@ class TestConnection(TestCase):
              patch('os.path.exists', return_value=True), \
              patch('ctgenerics.connect.load_dbconfig', return_value=MagicMock(user='user', password='pass', host='host', port=5439, dbname='dbname')), \
              patch('ctgenerics.connect.create_engine') as mock_create_engine:
-            rs = connect.Redshift('source')
+            connect.Redshift('source')
             mock_create_engine.assert_called_once()
 
     def test_init_with_default_config_path(self):
@@ -27,7 +25,7 @@ class TestConnection(TestCase):
         with patch('os.path.exists', side_effect=lambda path: path == 'config.yaml'), \
              patch('ctgenerics.connect.load_dbconfig', return_value=MagicMock(user='user', password='pass', host='host', port=5439, dbname='dbname')), \
              patch('ctgenerics.connect.create_engine') as mock_create_engine:
-            rs = connect.Redshift('source')
+            connect.Redshift('source')
             mock_create_engine.assert_called_once()       
 
     def test_DBConfig_values(self):
