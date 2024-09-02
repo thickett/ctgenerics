@@ -2,7 +2,7 @@ from setuptools import setup, find_packages
 
 setup(
     name='ctgenerics',
-    version='0.1.0',
+    version='0.1.1',
     packages=find_packages(),
     description='A utility package for my STST projects',
     long_description=open('README.md').read(),
