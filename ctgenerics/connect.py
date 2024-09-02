@@ -24,14 +24,25 @@ class DBConfig(BaseModel):
     default_schema: Optional[str] = None
 
 
+
 def load_dbconfig(config_path:str,source:str, **kwargs: Any) -> DBConfig:
     try:
         with open(config_path,'r') as f:
             db_config = yaml.safe_load(f)
-            credentials = db_config[source]    
+            if source in db_config:
+                credentials = db_config[source]
+                return DBConfig(**credentials)   
+            else:
+                raise ValueError(f'No credentials found for source: {source}')
+    except FileNotFoundError:
+        print(f"The configuration file {config_path} was not found.")
+    except yaml.YAMLError as e:
+        print(f"Error parsing YAML file: {e}")
     except ValidationError as e:
-        print(f'Error loading db config: {e}')
-    return DBConfig(**credentials)
+        print(f"Error validating configuration data: {e}")
+    except Exception as e:
+        print(f"Unexpected error: {e}")
+    raise MissingConfigError()
 
 
 
