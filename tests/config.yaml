@@ -1,0 +1,8 @@
+test-db:
+  host: test.dev.redshift.amazonaws.com
+  port: 5432
+  dbname: test-dbname
+  user: test-user
+  password: test-password
+  DB_type: redshift
+  default_schema: test-schema
