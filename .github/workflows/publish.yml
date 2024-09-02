@@ -1,0 +1,38 @@
+name: Python Package release
+
+on:
+  push:
+    branches:
+      - master
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Set up Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: '3.8'
+
+      - name: Install dependencies
+        run: |
+          pip install bump2version twine wheel
+          pip install -r requirements.txt
+
+      - name: Run tests
+        run: |
+          python -m unittest discover tests
+
+      - name: Bump version and tag
+        if: github.event_name == 'workflow_dispatch'
+        run: |
+          bump2version patch  # or minor or major, depending on the change
+          git push && git push --tags
+
+      - name: Build and publish to PyPI
+        if: github.event_name == 'workflow_dispatch'
+        run: |
+          python setup.py sdist bdist_wheel
+          twine upload dist/* --skip-existing --username ${{ secrets.PYPI_USERNAME }} --password ${{ secrets.PYPI_PASSWORD }}
