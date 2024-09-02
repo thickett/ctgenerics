@@ -9,7 +9,7 @@ setup(
     long_description_content_type='text/markdown',
     author='Callum Thickett',
     author_email='callum.thickett@stepstone.com',
-    url='https://stash.stepstone.com/users/callum.thickett/repos/ctgenerics',
+    url='https://github.com/thickett/ctgenerics',
     install_requires=[
         'SQLAlchemy~=1.4.25',
         'psycopg2-binary==2.9.9',
