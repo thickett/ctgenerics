@@ -26,9 +26,6 @@ jobs:
       - name: Run tests
         run: |
           python -m unittest discover tests
-      - name: Run ruff checks
-        run: |
-          ruff check
       - name: Set up CI/CD Git user
         run: |
           git config --global user.name "GitHub Actions"

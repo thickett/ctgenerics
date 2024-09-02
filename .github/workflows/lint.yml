@@ -17,10 +17,16 @@ jobs:
       - name: Run ruff checks
         run: |
           ruff check --fix .
-      - name: Commit changes
+      - name: Set up CI/CD Git user
         run: |
           git config --global user.name "GitHub Actions"
           git config --global user.email "actions@github.com"
+
+      - name: Set up Git remote
+        run: |
+          git remote set-url origin https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git
+      - name: Commit changes
+        run: |
           git add .
-          git diff-index --quiet HEAD || git commit -m "Ruff fixes"
+          git diff-index --quiet HEAD || git commit -m "Apply Ruff fixes"
           git push
