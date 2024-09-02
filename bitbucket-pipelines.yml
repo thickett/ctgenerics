@@ -1,0 +1,21 @@
+image: python:3.8
+
+pipelines:
+  default:
+    - step:
+        name: Install dependencies
+        script:
+          - pip install -r requirements.txt
+          - pip install twine wheel
+
+    - step:
+        name: Run tests
+        script:
+          - python -m unittest discover tests
+
+    - step:
+        name: Build and Publish
+        script:
+          - python setup.py sdist bdist_wheel
+          - twine upload dist/* --username $PYPI_USERNAME --password $PYPI_PASSWORD
+        trigger: manual
