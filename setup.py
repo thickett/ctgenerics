@@ -11,8 +11,9 @@ setup(
     author_email='callum.thickett@stepstone.com',
     url='https://stash.stepstone.com/users/callum.thickett/repos/ctgenerics',
     install_requires=[
-        'numpy',
-        'pandas'
+        'SQLAlchemy~=1.4.25',
+        'psycopg2-binary==2.9.9',
+        'pandas>=2.2.2'
     ],
     classifiers=[
         'Programming Language :: Python :: 3',
