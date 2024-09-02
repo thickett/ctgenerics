@@ -145,3 +145,17 @@ class Redshift:
         except SQLAlchemyError as e:
             print(e.__dict__["orig"])
             return e
+        
+def rs_run_sql(source:str, sql:str, debug:bool=True) -> None:
+    ds = Redshift(source=source)
+    ds.run_sql(sql, debug=debug)
+    ds.conn.close()
+
+
+def rs_run_sql_and_download_to_df(source:str, sql:str, debug:bool=True) -> pd.DataFrame:
+    ds = Redshift(source=source)
+    answers = ds.run_sql(sql, debug=debug)
+    ret = answers.fetchall()
+    keys = answers.keys()
+    ds.conn.close()
+    return pd.DataFrame(ret, columns=keys)
