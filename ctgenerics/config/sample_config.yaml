@@ -1,0 +1,17 @@
+tjgrs2db:
+  host: tjgsqlrs2.cuiplefksiss.eu-west-1.redshift.amazonaws.com
+  port: 5439
+  dbname: tjgrs2db
+  user: callumthickett
+  password: 
+  DB_type: redshift
+  default_schema: public
+
+dw-live:
+  host: live.c1i7qcvxphat.eu-west-1.redshift.amazonaws.com
+  port: 5439
+  dbname: live
+  user: callum.thickett
+  password: 
+  DB_type: redshift
+  default_schema: corpdev
