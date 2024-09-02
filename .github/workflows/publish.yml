@@ -1,4 +1,31 @@
-name: ctgenerics
+name: ruff
+on: push
+
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Set up Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: '3.11'
+      - name: Install dependencies
+        run: |
+          pip install ruff
+      - name: Run ruff checks
+        run: |
+          ruff check .
+          ruff fix .
+      - name: Commit changes
+        run: |
+          git config --global user.name "GitHub Actions"
+          git config --global user.email "
+          git add .
+          git commit -m "Ruff fixes"
+          git push
+
+name: test + publish
 
 on:
   push:
@@ -27,7 +54,9 @@ jobs:
       - name: Run tests
         run: |
           python -m unittest discover tests
-
+      - name: Run ruff checks
+        run: |
+          ruff check
       - name: Set up CI/CD Git user
         run: |
           git config --global user.name "GitHub Actions"
