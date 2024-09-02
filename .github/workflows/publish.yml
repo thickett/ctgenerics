@@ -1,4 +1,4 @@
-name: Python Package release
+name: ctgenerics
 
 on:
   push:
