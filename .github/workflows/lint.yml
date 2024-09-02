@@ -16,8 +16,7 @@ jobs:
           pip install ruff
       - name: Run ruff checks
         run: |
-          ruff check .
-          ruff fix .
+          ruff check --fix .
       - name: Commit changes
         run: |
           git config --global user.name "GitHub Actions"
