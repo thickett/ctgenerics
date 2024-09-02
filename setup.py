@@ -10,10 +10,16 @@ setup(
     author='Callum Thickett',
     author_email='callum.thickett@stepstone.com',
     url='https://github.com/thickett/ctgenerics',
+    include_package_data=True,
+    package_data={
+        'ctgenerics':['config/sample_config.ini']
+    },
     install_requires=[
         'SQLAlchemy~=1.4.25',
         'psycopg2-binary==2.9.9',
-        'pandas~=2.2.2'
+        'pandas~=2.2.2',
+        'pydantic',
+        'pyyaml'
     ],
     classifiers=[
         'Programming Language :: Python :: 3',
