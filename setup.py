@@ -13,7 +13,7 @@ setup(
     install_requires=[
         'SQLAlchemy~=1.4.25',
         'psycopg2-binary==2.9.9',
-        'pandas>=2.2.2'
+        'pandas~=2.2.2'
     ],
     classifiers=[
         'Programming Language :: Python :: 3',
