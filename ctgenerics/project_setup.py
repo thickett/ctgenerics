@@ -24,12 +24,12 @@ class ProjectSetup:
             
             return True
     def create_gitignore(self):
-        with open('.gitignore', 'w') as f:
+        with open(f'{self.project_name}/.gitignore', 'w') as f:
             f.write('*.pyc\n__pycache__\n')
         print('.gitignore created.')
 
     def populate_readme(self):
-        with open('README.md', 'w') as f:
+        with open(f'{self.project_name}/README.md', 'w') as f:
             f.write(f'## {self.project_name}\n\n{self.project_description}\n\n### Author\n{self.author}')
         print('README.md created.')
 
@@ -44,6 +44,7 @@ class ProjectSetup:
 
         # Create __init__.py files
         open(os.path.join(self.project_name, 'src', '__init__.py'), 'a').close()
+        open(os.path.join(self.project_name, 'src', 'main.py'), 'a').close()
         open(os.path.join(self.project_name, 'tests', '__init__.py'), 'a').close()
         # Create setup.cfg in the cache directory
         with open(os.path.join(self.project_name, '.ctgenerics_cache', 'setup.cfg'), 'w') as f:
