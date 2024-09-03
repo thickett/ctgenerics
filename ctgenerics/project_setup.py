@@ -50,5 +50,8 @@ class ProjectSetup:
         with open(os.path.join(self.project_name, '.ctgenerics_cache', 'setup.cfg'), 'w') as f:
             f.write(f'[metadata]\nname = {self.project_name}\nauthor = {self.author}\n')
             print('File structure created.')
+
+def main():
+    ProjectSetup()
 if __name__ == '__main__':
-    setup = ProjectSetup()
+    main()
