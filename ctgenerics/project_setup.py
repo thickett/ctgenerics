@@ -11,9 +11,10 @@ class ProjectSetup:
 
     def setup_project(self):
         if self.is_project_setup():
+            self.create_file_structure()
             self.create_gitignore()
             self.populate_readme()
-            self.create_file_structure()
+            
 
 
     def is_project_setup(self):
