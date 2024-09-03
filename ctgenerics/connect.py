@@ -49,17 +49,14 @@ def load_dbconfig(config_path:str,source:str, **kwargs: Any) -> DBConfig:
 
 class Redshift:
     def __init__(self, source:str, schema: Optional[str] =None, config_path: Optional[str] = None):
-        if config_path:
-            pass
-        else:
-            config_path = os.getenv('CTGENERICS_CONFIG')
-        if config_path and os.path.exists(config_path):
-            pass
-        else:
+        config_path = config_path or os.getenv('CTGENERICS_CONFIG')
+        if not os.path.exists(config_path):
+        # Fallback to default config file if main config_path is invalid
             if os.path.exists('config.yaml'):
                 config_path = 'config.yaml'
             else:
-                raise MissingConfigError()
+                # Raise an error if no valid configuration is found
+                raise MissingConfigError(f"Configuration file {config_path} not found.")
         db_config = load_dbconfig(config_path, source)
         self.db_config = db_config
     
@@ -115,7 +112,6 @@ class Redshift:
                 )
             return result
         except SQLAlchemyError as e:
-            # error = str(e)
             return e
 
     def write_to_sql(
