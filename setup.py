@@ -17,7 +17,7 @@ setup(
     install_requires=[
         'SQLAlchemy~=1.4.25',
         'psycopg2-binary==2.9.6',
-        'pandas<=2.2.0',
+        'pandas<2.2.0',
         'pydantic',
         'pyyaml'
     ],
